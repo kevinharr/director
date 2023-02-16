@@ -6,6 +6,7 @@ require('dotenv').config()
 
 // import routers
 const indexRouter = require('./routes/index.js')
+const directorsRouter = require('./routes/directors.js')
 
 // create the express app
 const app = express()
@@ -17,6 +18,7 @@ app.use(express.json())
 
 // mount imported routes
 app.use('/', indexRouter)
+app.use('/api/directors', directorsRouter)
 
 // handle 404 errors
 app.use(function (req, res, next) {
