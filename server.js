@@ -2,7 +2,7 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-require('otenv').config()
+require('dotenv').config()
 
 // import routers
 const indexRouter = require('./routes/index.js')
