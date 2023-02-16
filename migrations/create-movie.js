@@ -1,8 +1,9 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Directors', {
+    await queryInterface.createTable('Movies', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,8 +13,18 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      born: {
-        type: Sequelize.INTEGER
+      genre: {
+        type: Sequelize.ENUM('Action', 'Drama', 'Horror', 'Thriller', 'Science Fiction', 'Western', 'Romance', 'Adventure'),
+        defaultValue: 'Drama'
+      },
+      directorId: {
+        type: Sequelize.INTEGER,
+				allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Directors',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Directors');
+    await queryInterface.dropTable('Movies');
   }
 };
