@@ -12,7 +12,12 @@ const create = async (req, res) => {
 
   const index = async (req, res) => {
     try {
-      const directors = await Director.findAll()
+      const directors = await Director.findAll({
+        include: [{ 
+          model: Movie, 
+          as: 'movies'
+        }]
+      })
       res.status(200).json(directors)
     } catch (error) {
       res.status(500).json(error)
