@@ -23,3 +23,15 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Director;
 };
+
+class Director extends Model {
+  static associate(models) {
+
+    // define association here
+    Director.hasMany(models.Movie, {
+      foreignKey: 'directorId',
+      as: 'movies'
+    })
+
+  }
+}

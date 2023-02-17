@@ -1,4 +1,5 @@
-const { Director } = require("../models")
+
+const { Director, Movie } = require("../models")
 
 const create = async (req, res) => {
     try {
@@ -39,13 +40,29 @@ const create = async (req, res) => {
       res.status(500).json(error)
     }
   }
-  
-  module.exports = {
-    create,
-    index,
-    update,
-    delete: deleteDirector
+
+
+
+const addMovie = async (req, res) => {
+  try {
+    req.body.directorId = req.params.id
+    const movie = await Movie.create(req.body)
+    res.status(200).json(movie)
+  } catch (error) {
+    res.status(500).json(error)
   }
+}
+
+module.exports = {
+  create,
+  index,
+  update,
+  delete: deleteDirector,
+  addMovie
+}
+  
+
+
   
 
   

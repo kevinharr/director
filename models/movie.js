@@ -13,7 +13,7 @@ Movie.init({
       type: DataTypes.ENUM('Action', 'Drama', 'Horror', 'Thriller', 'Science Fiction', 'Western', 'Romance', 'Adventure'),
       defaultValue: 'Drama'
     },
-    movieId: {
+    directorId: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			onDelete: 'CASCADE',
@@ -29,3 +29,14 @@ Movie.init({
 
 	return Movie;
 };
+
+class Movie extends Model {
+  static associate(models) {
+    
+    // define association here
+    Movie.belongsTo(models.Director, {
+      foreignKey: 'directorId',
+    })
+
+  }
+}
